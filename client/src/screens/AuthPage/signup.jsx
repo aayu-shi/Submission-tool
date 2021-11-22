@@ -9,6 +9,7 @@ import {
   Button,
   ErrorMsg,
 } from "./formStyles";
+import { Marginer } from "../../components/commonStyles";
 import axios from "axios";
 
 function Signup() {
@@ -38,6 +39,7 @@ function Signup() {
   };
   return (
     <div>
+      <Marginer direction="vertical" margin={80} />
       <MainContainer>
         <WelcomeText>Welcome</WelcomeText>
         <InputContainer>

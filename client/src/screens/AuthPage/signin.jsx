@@ -10,6 +10,7 @@ import {
   Button,
   ErrorMsg,
 } from "./formStyles";
+import { Marginer } from "../../components/commonStyles";
 
 function Login(props) {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ function Login(props) {
   };
   return (
     <div>
+      <Marginer direction="vertical" margin={80} />
       <MainContainer>
         <WelcomeText>Welcome</WelcomeText>
         <InputContainer>

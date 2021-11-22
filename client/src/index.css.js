@@ -5,7 +5,6 @@ export const GlobalStyle = createGlobalStyle`
   margin:0;
   padding :0;
   outline:0;
-  background-color:		#F0F0F0;
   text-decoration:none;
   box-sizing: border-box;
 }
@@ -15,6 +14,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     color:#333;
+    background-color:white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 

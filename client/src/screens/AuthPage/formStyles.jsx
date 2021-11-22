@@ -2,7 +2,8 @@ import styled from "styled-components";
 import React from "react";
 
 export const MainContainer = styled.div`
-  margin-top: 8%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -116,6 +117,7 @@ export const Button = styled.button`
 const Msg = styled.div`
   color: #b22222;
   padding: 1rem;
+  background-color: transparent;
 `;
 export function ErrorMsg(props) {
   const { msg } = props;
