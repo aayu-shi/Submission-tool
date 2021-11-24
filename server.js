@@ -6,6 +6,7 @@ require("dotenv").config({
 });
 const authRoutes = require("./routes/auth");
 const classRoutes = require("./routes/classroom");
+const assignmentRoutes = require("./routes/assignments");
 let session = require("express-session");
 
 //app
@@ -35,6 +36,7 @@ app.use(cors());
 //routes middleware
 app.use("/api", authRoutes);
 app.use("/classroom", classRoutes);
+app.use("/assignment", assignmentRoutes);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

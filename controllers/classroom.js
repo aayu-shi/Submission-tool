@@ -27,3 +27,18 @@ exports.createClass = (req, res) => {
       res.status(409).json({ errors: err });
     });
 };
+
+exports.updateClass = async (req, res) => {
+  const newMember = req.body.student;
+  const id = req.body.id;
+
+  try {
+    await Classroom.findById(id, (err, updatedClass) => {
+      updatedClass.members.push(newMember);
+      updatedClass.save();
+      res.status(200).json(updatedClass);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

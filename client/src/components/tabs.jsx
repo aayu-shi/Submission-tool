@@ -8,6 +8,8 @@ const Tab = styled.button`
   background: white;
   border: 0;
   outline: 0;
+  justify-content: center;
+  width: 100%;
   ${({ active }) =>
     active &&
     `
@@ -39,7 +41,5 @@ function TabGroup() {
     </>
   );
 }
-// Usage
-<TabGroup />;
 
 export default TabGroup;

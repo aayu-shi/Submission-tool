@@ -11,9 +11,11 @@ import {
   ErrorMsg,
 } from "./formStyles";
 import { Marginer } from "../../components/commonStyles";
+import useToken from "../../customHooks/useToken";
 
 function Login(props) {
   const navigate = useNavigate();
+  const { token, setToken } = useToken();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -26,6 +28,11 @@ function Login(props) {
     axios
       .post("http://localhost:8000/api/signin", user)
       .then((res) => {
+        console.log(res);
+        setToken(res.data?.token);
+        console.log(res.data.message.role);
+        sessionStorage.setItem("role", res.data?.message?.role);
+        console.log("user token saved");
         props.setUserLogin(res.data.message);
         navigate("/");
       })

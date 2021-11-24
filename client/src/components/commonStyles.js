@@ -34,6 +34,8 @@ export const Dropdown = (props) => {
   const navigate = useNavigate();
   const logout = () => {
     props.setUserLogin({});
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
     navigate("/login");
   };
   return (
@@ -179,4 +181,11 @@ export const Grid = styled.div`
   display: inline-grid;
   padding: 20px;
   grid-template-columns: auto auto auto;
+`;
+
+export const Logo = styled.img`
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
 `;

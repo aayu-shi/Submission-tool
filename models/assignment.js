@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 let userSchema = new Schema(
   {
-    tile: {
+    title: {
       type: String,
       required: true,
     },
     description: {
       type: String,
     },
-    creator: {
+    classId: {
       type: String,
       required: true,
     },
@@ -20,6 +20,12 @@ let userSchema = new Schema(
       type: Number,
       default: 0,
     },
+    deadline: {
+      type: Date,
+      default: new Date(),
+    },
+    submissions: [String],
+    submittedBy: [String],
     createdAt: {
       type: Date,
       default: new Date(),
@@ -27,7 +33,7 @@ let userSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "class",
+    collection: "assignment",
   }
 );
-module.exports = mongoose.model("Class", userSchema);
+module.exports = mongoose.model("Assignment", userSchema);

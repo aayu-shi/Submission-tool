@@ -3,7 +3,7 @@ import styled from "styled-components";
 // import { Link } from "react-router-dom";
 // import { Button } from "../AuthPage/formStyles";
 import logo from "../assets/read.png";
-import { Dropdown } from "./commonStyles";
+import { Dropdown, Logo } from "./commonStyles";
 
 const NavigationWrapper = styled.nav`
   top: 0;
@@ -45,19 +45,12 @@ const Element = styled.text`
   padding: 0 1rem;
   height: 100%;
 `;
-const Logo = styled.img`
-  background-color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-  height: 100%;
-`;
 const Navigation = (props) => {
   return (
     <NavigationWrapper>
       <Align>
         <Element>
-          <Logo src={logo} alt="logo" height="50" width="100" />
+          <Logo src={logo} alt="logo" height="70" width="100" />
           Submission Tool
         </Element>
       </Align>
