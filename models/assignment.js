@@ -1,5 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const subSchema = new Schema({
+  studentId: {
+    type: String,
+  },
+  submittedFile: {
+    type: String,
+    required: true,
+  },
+  student: {
+    type: String,
+  },
+  points: {
+    type: String,
+    default: "",
+  },
+});
 let userSchema = new Schema(
   {
     title: {
@@ -24,8 +40,7 @@ let userSchema = new Schema(
       type: Date,
       default: new Date(),
     },
-    submissions: [String],
-    submittedBy: [String],
+    submissions: [subSchema],
     createdAt: {
       type: Date,
       default: new Date(),

@@ -2,7 +2,12 @@ import React from "react";
 import GetData from "../../Actions/getClasses";
 import ClassCard from "../../components/classCard";
 import { Marginer, Grid } from "../../components/commonStyles";
-
+import styled from "styled-components";
+const Title = styled.h4`
+  margin-left: 20px;
+  font-size: 26px;
+  font-weight: 500;
+`;
 const ClassesStudent = (props) => {
   const allClasses = GetData();
   let classes = allClasses.filter((class_data) => {
@@ -21,7 +26,7 @@ const ClassesStudent = (props) => {
   return (
     <div>
       <Marginer direction="vertical" margin={80} />
-      <h4>My Courses</h4>
+      <Title>My Courses</Title>
       {classes.map((index) => {
         return (
           <Grid key={index._id}>
@@ -30,7 +35,7 @@ const ClassesStudent = (props) => {
         );
       })}
       <Marginer direction="vertical" margin={80} />
-      <h4>Available Courses</h4>
+      <Title>Available Courses</Title>
       {availableClasses.map((index) => {
         return (
           <Grid key={index._id}>

@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config({
   path: "./config/config.env",
 });
+let morgan = require("morgan");
 const authRoutes = require("./routes/auth");
 const classRoutes = require("./routes/classroom");
 const assignmentRoutes = require("./routes/assignments");
@@ -32,6 +33,7 @@ mongoose
 
 //middlewares
 app.use(cors());
+app.use(morgan("dev"));
 
 //routes middleware
 app.use("/api", authRoutes);

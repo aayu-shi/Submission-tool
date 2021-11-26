@@ -5,7 +5,7 @@ import TabGroup from "./tabs";
 import styled from "styled-components";
 import CreateAssignment from "../../components/createAssignment";
 import Assignments from "./assignments";
-import { Button } from "../../components/commonStyles";
+import AssignmentDetails from "./assignmentDetails";
 
 const Container = styled.div`
   margin-top: 8%;
@@ -28,13 +28,10 @@ const Classroom = (props) => {
         <h1>{name}</h1>
         <TabGroup />
         {assignmentDetails.index ? (
-          <Button
-            onClick={() => {
-              setassignmentDetails({});
-            }}
-          >
-            {"<"}
-          </Button>
+          <AssignmentDetails
+            assignmentDetails={assignmentDetails}
+            setassignmentDetails={setassignmentDetails}
+          />
         ) : (
           <div>
             {userRole === "staff" ? <CreateAssignment /> : <div />}

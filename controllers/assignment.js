@@ -17,7 +17,6 @@ exports.createAssignment = (req, res) => {
     deadline: deadline,
     selectedFile: selectedFile,
   });
-  console.log(newAssignment);
   newAssignment
     .save()
     .then((response) => {
@@ -29,4 +28,78 @@ exports.createAssignment = (req, res) => {
     .catch((err) => {
       res.status(409).json({ errors: err });
     });
+};
+
+exports.updateAssignment = async (req, res) => {
+  const id = req.body.id;
+  const submission = {
+    studentId: req.body.studentId,
+    submittedFile: req.body.submittedFile,
+    student: req.body.student,
+    points: "",
+  };
+  const query = Assignment.findById(id, (err, updatedAssignment) => {
+    updatedAssignment.submissions.push(submission);
+    updatedAssignment.submissionCount = updatedAssignment.submissionCount + 1;
+    updatedAssignment.save();
+    res.status(200).json(updatedAssignment);
+  });
+
+  try {
+    await query.clone();
+  } catch (error) {
+    res.status(409).json({ errors: error });
+    console.log(error);
+  }
+};
+
+exports.gradeAssignment = async (req, res) => {
+  const id = req.body.id;
+  const submission = {
+    studentId: req.body.studentId,
+    submittedFile: req.body.submittedFile,
+    student: req.body.student,
+    points: req.body.points,
+  };
+
+  const query = Assignment.findById(id, (err, updatedAssignment) => {
+    let assignments = [];
+    updatedAssignment.submissions.forEach((element) => {
+      if (element.studentId === submission.studentId) {
+        assignments.push(submission);
+      } else {
+        assignments.push(element);
+      }
+    });
+    updatedAssignment.submissions = [...assignments];
+    updatedAssignment.save();
+    res.status(200).json(updatedAssignment);
+  });
+
+  try {
+    await query.clone();
+  } catch (error) {
+    res.status(409).json({ errors: error });
+    console.log(error);
+  }
+};
+
+exports.getSubmission = async (req, res) => {
+  const id = req.query.id;
+  const studentId = req.query.studentId;
+  let result = "";
+  const query = Assignment.findById(id, (err, getAssignment) => {
+    getAssignment.submissions.forEach((element) => {
+      if (element.studentId === studentId) {
+        console.log(element);
+        result = element.submittedFile;
+      }
+    });
+    res.status(200).json(result);
+  });
+  try {
+    await query.clone();
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
 };

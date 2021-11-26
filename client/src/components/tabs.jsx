@@ -37,7 +37,7 @@ function TabGroup() {
         ))}
       </ButtonGroup>
       <p />
-      <p> {active} </p>
+      {/* <p> {active} </p> */}
     </>
   );
 }

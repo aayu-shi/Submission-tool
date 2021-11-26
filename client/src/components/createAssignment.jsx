@@ -132,7 +132,7 @@ const CreateAssignment = (props) => {
             />
           </InputContainer>
           <InputContainer>
-            <InputText>Upload File</InputText>
+            <InputText>Upload File (* images and pdf only)</InputText>
             <FileBase
               type="file"
               multiple={false}

@@ -21,7 +21,7 @@ const Tab = styled.button`
 const ButtonGroup = styled.div`
   display: flex;
 `;
-const types = ["Assignments", "Lectures and Videos", "Discussions"];
+const types = ["Assignments", "People"];
 export default function TabGroup() {
   const [active, setActive] = useState(types[0]);
   return (
@@ -38,7 +38,7 @@ export default function TabGroup() {
         ))}
       </ButtonGroup>
       <p />
-      <p> {active} </p>
+      {/* <p> {active} </p> */}
     </>
   );
 }

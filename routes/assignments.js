@@ -3,7 +3,13 @@ const router = express.Router();
 const {
   getAssignments,
   createAssignment,
+  updateAssignment,
+  gradeAssignment,
+  getSubmission,
 } = require("../controllers/assignment");
 router.get("/geAssignments", getAssignments);
 router.post("/createAssignment", createAssignment);
+router.put("/updateAssignment", updateAssignment);
+router.put("/gradeAssignment", gradeAssignment);
+router.get("/getSubmission", getSubmission);
 module.exports = router;

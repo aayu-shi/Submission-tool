@@ -19,7 +19,7 @@ const DropDownLi = styled(StyledLi)`
     display: block;
   }
 `;
-const SubA = styled.a`
+export const SubA = styled.a`
   display: block;
   color: #595959;
   text-decoration: none;
@@ -48,54 +48,6 @@ export const Dropdown = (props) => {
     </DropDownLi>
   );
 };
-
-export const MainContainer = styled.div`
-  margin-top: 2%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: white;
-  height: 80vh;
-  width: 80vw;
-  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
-  border-radius: 10px;
-  color: black;
-  @media only screen and (max-width: 320px) {
-    width: 80vw;
-    height: 98vh;
-    hr {
-      margin-bottom: 0.3rem;
-    }
-    h4 {
-      font-size: small;
-    }
-  }
-  @media only screen and (min-width: 360px) {
-    width: 80vw;
-    height: 90vh;
-    h4 {
-      font-size: small;
-    }
-  }
-  @media only screen and (min-width: 411px) {
-    width: 80vw;
-    height: 80vh;
-  }
-  @media only screen and (min-width: 768px) {
-    width: 80vw;
-    height: 80vh;
-  }
-  @media only screen and (min-width: 1024px) {
-    width: 70vw;
-    height: 90vh;
-  }
-  @media only screen and (min-width: 1280px) {
-    width: 80vw;
-    height: 78vh;
-  }
-`;
 
 export const Input = styled.input`
   margin-bottom: 0.8rem;

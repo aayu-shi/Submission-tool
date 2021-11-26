@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router";
 import GetData from "../../Actions/getAssignments";
 import styled from "styled-components";
-import { Marginer, Logo, Button } from "../../components/commonStyles";
+import { Marginer, Logo } from "../../components/commonStyles";
 import icon from "../../assets/task.png";
 
 const AssignmentContainer = styled.div`
@@ -29,10 +29,6 @@ const Text = styled.h4`
 const Assignments = (props) => {
   const { id } = useParams();
   const allAssignments = GetData();
-  const Back = () => {
-    props.setAssignmentDetails();
-  };
-
   let assignments = allAssignments.filter((data) => {
     return id.includes(data.classId);
   });

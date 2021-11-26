@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { Link } from "react-router-dom";
-// import { Button } from "../AuthPage/formStyles";
 import logo from "../assets/read.png";
 import { Dropdown, Logo } from "./commonStyles";
 

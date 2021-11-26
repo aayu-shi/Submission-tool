@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Buttons } from "../components/commonStyles";
+import Box from "@mui/material/Box";
+// import { Button, Buttons } from "../components/commonStyles";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const MainContainer = styled.div`
   margin: 5%;
@@ -36,13 +42,40 @@ const Description = styled.p`
   color: #595959;
   height: 35%;
 `;
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+  >
+    •
+  </Box>
+);
+
+const CourseCard = (props) => {
+  return (
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          {props.name}
+        </Typography>
+        <Typography variant="body2">{props.desc}</Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
+  );
+};
 const addStudent = (id, student) => {
   axios
     .put(`http://localhost:8000/classroom/updateClass`, {
       id: id,
       student: student,
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      console.log(res);
+      window.location.reload();
+    })
     .catch((err) => console.log(err));
 };
 const ClassCard = (props) => {
@@ -52,10 +85,14 @@ const ClassCard = (props) => {
         to={{ pathname: `/classroom/${props.data._id}/${props.data.name}` }}
         style={{ textDecoration: "none" }}
       >
-        <MainContainer>
+        {/* <MainContainer>
           <Title>{props.data.name}</Title>
           <Description>{props.data.description}</Description>
-        </MainContainer>{" "}
+        </MainContainer>{" "} */}
+        <CourseCard
+          name={props.data.name}
+          desc={props.data.description}
+        ></CourseCard>
       </Link>
     );
   } else
@@ -63,11 +100,11 @@ const ClassCard = (props) => {
       <MainContainer>
         <Title>{props.data.name}</Title>
         <Description>{props.data.description}</Description>
-        <Buttons>
+        {/* <Buttons>
           <Button onClick={() => addStudent(props.data._id, props.user.email)}>
             Enroll
           </Button>
-        </Buttons>
+        </Buttons> */}
       </MainContainer>
     );
 };

@@ -26,9 +26,6 @@ const App = () => {
       _id: currentUser.userId,
     };
   }
-  // if(token) {
-  //   setUserLogin(parseJwt(token));
-  // }
 
   return (
     <Body>
@@ -70,5 +67,6 @@ const Body = styled.div`
   background-size: cover;
   width: 100%;
   height: 100%;
+  min-width: 100vw;
   min-height: 100vh;
 `;
