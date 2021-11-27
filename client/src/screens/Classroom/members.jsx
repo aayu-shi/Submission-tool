@@ -10,13 +10,16 @@ import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import GetMembers from "../../Actions/getMembers";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
 
 export default function Members(props) {
+  const { id } = useParams();
+  const members = GetMembers(id);
   return (
     <Box
       sx={{
@@ -28,7 +31,7 @@ export default function Members(props) {
         <Grid item xs={12} md={6}>
           <Demo>
             <List>
-              {props.members.map((element, index) => (
+              {members.map((element, index) => (
                 <ListItem
                   secondaryAction={
                     <IconButton edge="end" aria-label="email">

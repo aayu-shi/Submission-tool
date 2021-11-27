@@ -103,3 +103,20 @@ exports.getSubmission = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+exports.deleteAssignment = async (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+  const query = Assignment.findByIdAndDelete(id, (err, element) => {
+    if (err) {
+      res.status(404).json({ message: error });
+    } else {
+      res.status(200).json("deleted successfully");
+    }
+  });
+  try {
+    await query.clone();
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};

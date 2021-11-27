@@ -42,3 +42,14 @@ exports.updateClass = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.getMembers = async (req, res) => {
+  const id = req.query.id;
+  try {
+    await Classroom.findById(id, (err, updatedClass) => {
+      res.status(200).json(updatedClass.members);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

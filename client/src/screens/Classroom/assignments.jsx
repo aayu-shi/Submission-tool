@@ -2,10 +2,17 @@ import React from "react";
 import { useParams } from "react-router";
 import GetData from "../../Actions/getAssignments";
 import styled from "styled-components";
-import { Marginer, Logo } from "../../components/commonStyles";
+import axios from "axios";
+import {
+  Marginer,
+  Logo,
+  GetDate,
+  GetTime,
+} from "../../components/commonStyles";
 import icon from "../../assets/task.png";
 
 const AssignmentContainer = styled.div`
+  color: #595959;
   min-height: 12vh;
   width: 80vw;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.37);
@@ -20,14 +27,15 @@ const AssignmentContainer = styled.div`
 const Align = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 2%;
 `;
 const Text = styled.h4`
-  color: #595959;
   vertical-align: center;
+  margin-top: 2%;
 `;
 
 const Assignments = (props) => {
-  const id = props.classDetails._id;
+  const { id } = useParams();
   const allAssignments = GetData();
   let assignments = allAssignments.filter((data) => {
     return id.includes(data.classId);
@@ -36,7 +44,6 @@ const Assignments = (props) => {
     <div>
       <Marginer direction="vertical" margin={80} />
       {assignments.map((index) => {
-        let d = new Date(index.deadline);
         const Details = () => {
           props.setassignmentDetails({ index });
         };
@@ -48,21 +55,13 @@ const Assignments = (props) => {
                 <Logo src={icon} alt="logo" width="80" height="40" />
               </div>
               <Text>{index.title}</Text>
-              Submit before:
-              {"  " +
-                d.getDate() +
-                "/" +
-                d.getMonth() +
-                "/" +
-                d.getFullYear() +
-                " " +
-                (d.getHours() - 5 < 10
-                  ? "0" + (d.getHours() - 5)
-                  : d.getHours() - 5) +
-                ":" +
-                (d.getMinutes() - 30 < 10
-                  ? "0" + (d.getMinutes() - 30)
-                  : d.getMinutes() - 30)}
+              <div>
+                <strong>Due on:</strong>
+                {"  " +
+                  GetDate(index.deadline) +
+                  "  " +
+                  GetTime(index.deadline)}
+              </div>
             </Align>
           </AssignmentContainer>
         );

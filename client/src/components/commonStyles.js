@@ -141,3 +141,19 @@ export const Logo = styled.img`
   align-items: center;
   padding: 0 1rem;
 `;
+
+export const GetDate = (date) => {
+  var rdate =
+    date.slice(8, 10) + "/" + date.slice(5, 7) + "/" + date.slice(0, 4);
+  return rdate;
+};
+export const GetTime = (date) => {
+  let d = new Date(date);
+  const time = d.toLocaleTimeString("en-US", {
+    timeZone: "UTC",
+    hour12: true,
+    hour: "numeric",
+    minute: "numeric",
+  });
+  return time;
+};

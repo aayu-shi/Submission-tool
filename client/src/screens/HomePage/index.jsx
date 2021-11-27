@@ -1,5 +1,4 @@
 import React from "react";
-import Navigation from "../../components/navbar";
 import CreateClass from "../../components/createClass";
 import ClassesStudent from "./classesStudent";
 import ClassesTeacher from "./classesTeacher";

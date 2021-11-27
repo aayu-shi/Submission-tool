@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import back from "../../assets/back.png";
 import styled from "styled-components";
-import { SubA } from "../../components/commonStyles";
+import { SubA, GetDate, GetTime } from "../../components/commonStyles";
 import Pdfviewer from "../../components/pdfviewer";
+import axios from "axios";
 import SubmitAssignment from "../../components/submitAssignment";
 import SubmissionsList from "../../components/submissionsList";
 
@@ -42,25 +43,25 @@ const TitleBar = styled.div`
   padding: 3%;
 `;
 const Title = styled.h2``;
-const date = (date) => {
-  var rdate =
-    date.slice(8, 10) + "/" + date.slice(5, 7) + "/" + date.slice(0, 4);
-  return rdate;
-};
-const time = (date) => {
-  let d = new Date(date);
-  const time = d.toLocaleTimeString("en-US", {
-    timeZone: "UTC",
-    hour12: true,
-    hour: "numeric",
-    minute: "numeric",
-  });
-  return time;
-};
 
 const AssignmentDetails = (props) => {
   let userRole = sessionStorage.getItem("role") || "";
   const selectedFile = props.assignmentDetails.index.selectedFile;
+  function DeleteAssignment(id) {
+    const config = {
+      params: {
+        id: id,
+      },
+    };
+    axios
+      .get("http://localhost:8000/assignment/deleteAssignment", config)
+      .then((res) => {
+        console.log(res);
+        alert("deleted sucessfully");
+        window.location.reload();
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <Container>
       <BackButton
@@ -76,10 +77,17 @@ const AssignmentDetails = (props) => {
           <SubA>
             <strong>Due on:</strong>
             {"  " +
-              date(props.assignmentDetails.index.deadline) +
+              GetDate(props.assignmentDetails.index.deadline) +
               "  " +
-              time(props.assignmentDetails.index.deadline)}
+              GetTime(props.assignmentDetails.index.deadline)}
           </SubA>
+          <button
+            onClick={() => {
+              DeleteAssignment(props.assignmentDetails.index._id);
+            }}
+          >
+            Delete
+          </button>
         </TitleBar>
         <SubA>{props.assignmentDetails.index.description}</SubA>
         <SubContainer>

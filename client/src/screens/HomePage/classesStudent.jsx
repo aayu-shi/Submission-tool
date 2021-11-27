@@ -26,38 +26,38 @@ const ClassesStudent = (props) => {
       class_data.members.find((student) => student === email)
     );
   });
-  if (openClass === false) {
-    return (
-      <div>
-        <Marginer direction="vertical" margin={80} />
-        <Title>My Courses</Title>
-        {classes.map((index) => {
-          return (
-            <Grid key={index._id}>
-              <ClassCard
-                data={index}
-                user={props.user}
-                display="noButton"
-                setopenClass={setopenClass}
-                setClassData={setClassData}
-              />
-            </Grid>
-          );
-        })}
-        <Marginer direction="vertical" margin={80} />
-        <Title>Available Courses</Title>
-        {availableClasses.map((index) => {
-          return (
-            <Grid key={index._id}>
-              <ClassCard data={index} user={props.user} />
-            </Grid>
-          );
-        })}
-      </div>
-    );
-  } else {
-    return <Classroom user={props.user} classData={classData} />;
-  }
+  // if (openClass === false) {
+  return (
+    <div>
+      <Marginer direction="vertical" margin={80} />
+      <Title>My Courses</Title>
+      {classes.map((index) => {
+        return (
+          <Grid key={index._id}>
+            <ClassCard
+              data={index}
+              user={props.user}
+              display="noButton"
+              setopenClass={setopenClass}
+              setClassData={setClassData}
+            />
+          </Grid>
+        );
+      })}
+      <Marginer direction="vertical" margin={80} />
+      <Title>Available Courses</Title>
+      {availableClasses.map((index) => {
+        return (
+          <Grid key={index._id}>
+            <ClassCard data={index} user={props.user} />
+          </Grid>
+        );
+      })}
+    </div>
+  );
+  // } else {
+  //   return <Classroom user={props.user} classData={classData} />;
+  // }
 };
 
 export default ClassesStudent;

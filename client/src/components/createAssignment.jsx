@@ -59,6 +59,7 @@ const CreateAssignment = (props) => {
           selectedFile: "",
         });
         setIsOpen(false);
+        window.location.reload();
       })
       .catch((error) => {
         setError("please fill all details correctly");

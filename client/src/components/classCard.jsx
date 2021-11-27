@@ -81,26 +81,18 @@ const addStudent = (id, student) => {
 const ClassCard = (props) => {
   if (props.display === "noButton") {
     return (
-      // <Link
-      //   to={{ pathname: `/classroom/${props.data._id}/${props.data.name}` }}
-      //   style={{ textDecoration: "none" }}
-      // >
-      // {/* <MainContainer>
-      //   <Title>{props.data.name}</Title>
-      //   <Description>{props.data.description}</Description>
-      // </MainContainer>{" "} */}
-      <div
-        onClick={() => {
-          props.setopenClass(true);
-          props.setClassData(props.data);
+      <Link
+        to={{
+          pathname: `/classroom/${props.data._id}/${props.data.name}`,
+          query: { name: "name" },
         }}
+        style={{ textDecoration: "none" }}
       >
         <CourseCard
           name={props.data.name}
           desc={props.data.description}
         ></CourseCard>
-      </div>
-      // </Link>
+      </Link>
     );
   } else
     return (

@@ -66,7 +66,7 @@ export default function TabGroup(props) {
         )
       ) : (
         <MembersContainer>
-          <Members members={props.classData.members} />
+          <Members />
         </MembersContainer>
       )}
     </>

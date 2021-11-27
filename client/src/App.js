@@ -5,7 +5,7 @@ import Login from "./screens/AuthPage/signin";
 import Signup from "./screens/AuthPage/signup";
 import Home from "./screens/HomePage";
 import useToken from "./customHooks/useToken";
-// import Classroom from "./screens/Classroom";
+import Classroom from "./screens/Classroom";
 import Navigation from "./components/navbar";
 import { useLocation } from "react-router-dom";
 
@@ -61,17 +61,11 @@ const App = () => {
           path="/login"
           element={<Login setUserLogin={setUserLogin} />}
         />
-        {/* <Route
+        <Route
           exact
           path="/classroom/:id/:name"
-          element={
-            <Classroom
-              user={user}
-              setUserLogin={setUserLogin}
-              classDetails={""}
-            />
-          }
-        /> */}
+          element={<Classroom user={user} setUserLogin={setUserLogin} />}
+        />
       </Switch>
     </Body>
   );
