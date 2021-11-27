@@ -92,7 +92,10 @@ exports.getSubmission = async (req, res) => {
     getAssignment.submissions.forEach((element) => {
       if (element.studentId === studentId) {
         console.log(element);
-        result = element.submittedFile;
+        result = {
+          submittedFile: element.submittedFile,
+          points: element.points,
+        };
       }
     });
     res.status(200).json(result);

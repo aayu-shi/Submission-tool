@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import back from "../../assets/back.png";
 import styled from "styled-components";
-import { SubA, GetDate, GetTime } from "../../components/commonStyles";
+import { GetDate, GetTime } from "../../components/commonStyles";
 import Pdfviewer from "../../components/pdfviewer";
 import axios from "axios";
 import SubmitAssignment from "../../components/submitAssignment";
 import SubmissionsList from "../../components/submissionsList";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 
 const Container = styled.div`
   display: flex;
@@ -23,17 +25,23 @@ const BackButton = styled.img`
   margin-top: 1%;
   width: 40px;
 `;
+const Description = styled.div`
+  display: block;
+  color: #595959;
+  text-decoration: none;
+  background-color: white;
+  padding: 10px;
+  text-align: left;
+`;
 
 const AssignmentCard = styled.div`
   background-color: white;
   width: 100%;
-  height: 100%;
   margin-top: 1%;
   margin-left: 2%;
-  min-height: 70vh;
 `;
 const TitleBar = styled.div`
-  width: 100vw;
+  width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: table-cell;
@@ -41,6 +49,9 @@ const TitleBar = styled.div`
   text-align: left;
   vertical-align: middle;
   padding: 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 const Title = styled.h2``;
 
@@ -73,23 +84,30 @@ const AssignmentDetails = (props) => {
       />
       <AssignmentCard>
         <TitleBar>
-          <Title>{props.assignmentDetails.index.title}</Title>
-          <SubA>
-            <strong>Due on:</strong>
-            {"  " +
-              GetDate(props.assignmentDetails.index.deadline) +
-              "  " +
-              GetTime(props.assignmentDetails.index.deadline)}
-          </SubA>
-          <button
+          <div>
+            <Title>{props.assignmentDetails.index.title}</Title>
+            <Description>
+              <strong>Due on:</strong>
+              {"  " +
+                GetDate(props.assignmentDetails.index.deadline) +
+                "  " +
+                GetTime(props.assignmentDetails.index.deadline)}
+            </Description>
+          </div>
+
+          <Button
+            variant="contained"
+            disableElevation
+            color="error"
             onClick={() => {
               DeleteAssignment(props.assignmentDetails.index._id);
             }}
+            sx={{ maxHeight: 40 }}
           >
             Delete
-          </button>
+          </Button>
         </TitleBar>
-        <SubA>{props.assignmentDetails.index.description}</SubA>
+        <Description>{props.assignmentDetails.index.description}</Description>
         <SubContainer>
           {selectedFile ? (
             selectedFile.slice(5, 20) === "application/pdf" ? (
@@ -98,8 +116,8 @@ const AssignmentDetails = (props) => {
               <img
                 alt="assignment file"
                 src={selectedFile}
-                height="420"
-                width="320"
+                height="200"
+                width="400"
               />
             ) : (
               <iframe
@@ -115,6 +133,8 @@ const AssignmentDetails = (props) => {
           {userRole === "student" ? (
             <div>
               <h4>Submit Assignment</h4>
+              <br />
+              <br />
               <SubmitAssignment
                 id={props.assignmentDetails.index._id}
                 deadline={props.assignmentDetails.index.deadline}

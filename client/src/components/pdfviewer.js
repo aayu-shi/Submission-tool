@@ -13,12 +13,10 @@ const Container = styled.div`
 `;
 const PDF = styled.div`
   display: flex;
-  border: 1px solid #595959;
-  background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
   min-width: 200px;
   padding: 5%;
   margin: 2%;
+  cursor: pointer;
 `;
 const FileName = styled.div`
   padding: 2%;

@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
-// import { Button, Buttons } from "../components/commonStyles";
+import { Button as Btn, Buttons } from "../components/commonStyles";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
+import EmailIcon from "@mui/icons-material/Email";
 import Typography from "@mui/material/Typography";
 
 const MainContainer = styled.div`
@@ -42,30 +44,6 @@ const Description = styled.p`
   color: #595959;
   height: 35%;
 `;
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
-
-const CourseCard = (props) => {
-  return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {props.name}
-        </Typography>
-        <Typography variant="body2">{props.desc}</Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">View</Button>
-      </CardActions>
-    </Card>
-  );
-};
 const addStudent = (id, student) => {
   axios
     .put(`http://localhost:8000/classroom/updateClass`, {
@@ -78,6 +56,50 @@ const addStudent = (id, student) => {
     })
     .catch((err) => console.log(err));
 };
+const CourseCard = (props) => {
+  return (
+    <Card sx={{ minWidth: 275, minHeight: 150 }}>
+      <CardContent
+        sx={{
+          textAlign: "center",
+          textTransform: "capitalize",
+        }}
+      >
+        <Typography
+          variant="h5"
+          component="div"
+          sx={{ borderBottom: "1px solid #040526", fontWeight: "550" }}
+        >
+          {props.name}
+        </Typography>
+        <Typography variant="body2" sx={{ marginTop: "5px" }}>
+          {props.desc}
+        </Typography>
+      </CardContent>
+      {!props.id ? (
+        <CardContent sx={{ display: "flex", flexDirection: "row" }}>
+          <EmailIcon sx={{ fontSize: 12 }} />
+          <Typography variant="body2" sx={{ fontSize: "10px" }}>
+            {props.teacher}
+          </Typography>
+        </CardContent>
+      ) : (
+        <CardContent sx={{ display: "flex", justifyContent: "center" }}>
+          <CardActions>
+            <Button
+              size="small"
+              onClick={() => addStudent(props.id, props.email)}
+              variant="outlined"
+            >
+              Enroll
+            </Button>
+          </CardActions>
+        </CardContent>
+      )}
+    </Card>
+  );
+};
+
 const ClassCard = (props) => {
   if (props.display === "noButton") {
     return (
@@ -91,20 +113,28 @@ const ClassCard = (props) => {
         <CourseCard
           name={props.data.name}
           desc={props.data.description}
+          teacher={props.data.creator}
         ></CourseCard>
       </Link>
     );
   } else
     return (
-      <MainContainer>
-        <Title>{props.data.name}</Title>
-        <Description>{props.data.description}</Description>
-        {/* <Buttons>
-          <Button onClick={() => addStudent(props.data._id, props.user.email)}>
-            Enroll
-          </Button>
-        </Buttons> */}
-      </MainContainer>
+      <CourseCard
+        name={props.data.name}
+        desc={props.data.description}
+        teacher={props.data.creator}
+        id={props.data._id}
+        email={props.user.email}
+      ></CourseCard>
+      // <MainContainer>
+      //   <Title>{props.data.name}</Title>
+      //   <Description>{props.data.description}</Description>
+      //   <Buttons>
+      //     <Btn onClick={() => addStudent(props.data._id, props.user.email)}>
+      //       Enroll
+      //     </Btn>
+      //   </Buttons>
+      // </MainContainer>
     );
 };
 

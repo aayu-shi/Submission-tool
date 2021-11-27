@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { InputContainer, Form, InputText, Button } from "./commonStyles";
+import { InputContainer, Form, InputText, Button, Flex } from "./commonStyles";
 import FileBase from "react-file-base64";
 import Pdfviewer from "./pdfviewer";
 import SubmissionsList from "./submissionsList";
@@ -11,8 +11,19 @@ const SubmitAssignment = (props) => {
     selectedFile: "",
   });
   const [mySubmission, setMySubmission] = useState();
+  const [isDeadlineMissed, setisDeadlineMissed] = useState(false);
   const deadline = new Date(props.deadline);
-  const today = new Date();
+  console.log(deadline);
+
+  function realtimeClock() {
+    const now = new Date();
+    if (now.getTime() > deadline.getTime()) {
+      setisDeadlineMissed(true);
+    } else {
+      setisDeadlineMissed(false);
+    }
+  }
+  requestAnimationFrame(realtimeClock);
   const addSubmission = (e, id, userid, submittedFile, username) => {
     e.preventDefault();
     axios
@@ -51,6 +62,7 @@ const SubmitAssignment = (props) => {
         if (res.data !== "") {
           setIsAlreadySubmitted(true);
           setMySubmission(res.data);
+          console.log(mySubmission);
         }
       })
       .catch((err) => console.log(err));
@@ -65,17 +77,25 @@ const SubmitAssignment = (props) => {
 
   let currentUser = getuserdetail();
 
-  console.log(isAlreadySubmitted);
-
   return (
     <div>
       {isAlreadySubmitted ? (
         <div>
-          <p>already submitted</p>
-          <h4>My Submission: </h4>
-          <Pdfviewer pdf={mySubmission} name={"submission.pdf"} />
+          <p>Already Submitted</p>
+          <Pdfviewer
+            pdf={mySubmission?.submittedFile}
+            name={"submission.pdf"}
+          />
+          <Flex>
+            <h4>Grade: </h4>
+            {mySubmission?.points === "" ? (
+              <p>not yet graded</p>
+            ) : (
+              <p>{mySubmission?.points || "not yet graded"}</p>
+            )}
+          </Flex>
         </div>
-      ) : today > deadline ? (
+      ) : isDeadlineMissed ? (
         <div>deadline missed</div>
       ) : (
         <Form>

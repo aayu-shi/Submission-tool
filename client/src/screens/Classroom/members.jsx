@@ -17,7 +17,7 @@ const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
 
-export default function Members(props) {
+export default function Members() {
   const { id } = useParams();
   const members = GetMembers(id);
   return (
@@ -28,7 +28,7 @@ export default function Members(props) {
       }}
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} sx={{ minWidth: "100%" }}>
           <Demo>
             <List>
               {members.map((element, index) => (

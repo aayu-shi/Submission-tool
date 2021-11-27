@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router";
 import GetData from "../../Actions/getAssignments";
 import styled from "styled-components";
-import axios from "axios";
 import {
   Marginer,
   Logo,
@@ -10,6 +9,8 @@ import {
   GetTime,
 } from "../../components/commonStyles";
 import icon from "../../assets/task.png";
+import Typography from "@mui/material/Typography";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 const AssignmentContainer = styled.div`
   color: #595959;
@@ -28,10 +29,11 @@ const Align = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 2%;
+  width: 100%;
 `;
 const Text = styled.h4`
   vertical-align: center;
-  margin-top: 2%;
+  margin-top: 7px;
 `;
 
 const Assignments = (props) => {
@@ -42,7 +44,7 @@ const Assignments = (props) => {
   });
   return (
     <div>
-      <Marginer direction="vertical" margin={80} />
+      <Marginer direction="vertical" margin={100} />
       {assignments.map((index) => {
         const Details = () => {
           props.setassignmentDetails({ index });
@@ -51,17 +53,26 @@ const Assignments = (props) => {
           <AssignmentContainer key={index._id} onClick={Details}>
             <Align>
               <div>
-                <Marginer direction="vertical" margin={20} />
-                <Logo src={icon} alt="logo" width="80" height="40" />
+                <AssignmentIcon sx={{ fontSize: "35px" }} />
               </div>
-              <Text>{index.title}</Text>
-              <div>
+              <Typography
+                variant="body2"
+                component="div"
+                sx={{ fontWeight: "550", marginTop: "7px" }}
+              >
+                {index.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                component="div"
+                sx={{ fontWeight: "520", marginTop: "7px" }}
+              >
                 <strong>Due on:</strong>
                 {"  " +
                   GetDate(index.deadline) +
                   "  " +
                   GetTime(index.deadline)}
-              </div>
+              </Typography>
             </Align>
           </AssignmentContainer>
         );
