@@ -107,7 +107,10 @@ const AssignmentDetails = (props) => {
           {userRole === "student" ? (
             <div>
               <h4>Submit Assignment</h4>
-              <SubmitAssignment id={props.assignmentDetails.index._id} />{" "}
+              <SubmitAssignment
+                id={props.assignmentDetails.index._id}
+                deadline={props.assignmentDetails.index.deadline}
+              />{" "}
             </div>
           ) : (
             <SubmissionsList data={props.assignmentDetails.index} />

@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { InputContainer, Form, InputText, Button } from "./commonStyles";
 import FileBase from "react-file-base64";
+import Pdfviewer from "./pdfviewer";
+import SubmissionsList from "./submissionsList";
 
 const SubmitAssignment = (props) => {
   const [isAlreadySubmitted, setIsAlreadySubmitted] = useState(false);
   const [submittedFile, setSubmittedFile] = useState({
     selectedFile: "",
   });
+  const [mySubmission, setMySubmission] = useState();
+  const deadline = new Date(props.deadline);
+  const today = new Date();
   const addSubmission = (e, id, userid, submittedFile, username) => {
     e.preventDefault();
     axios
@@ -39,12 +44,14 @@ const SubmitAssignment = (props) => {
         studentId: user.userId,
       },
     };
-
-    console.log(user.userId, props.id);
     axios
       .get(`http://localhost:8000/assignment/getSubmission`, config)
       .then((res) => {
         console.log(res, "assignment details");
+        if (res.data !== "") {
+          setIsAlreadySubmitted(true);
+          setMySubmission(res.data);
+        }
       })
       .catch((err) => console.log(err));
   }, []);
@@ -63,7 +70,13 @@ const SubmitAssignment = (props) => {
   return (
     <div>
       {isAlreadySubmitted ? (
-        <p>already submitted</p>
+        <div>
+          <p>already submitted</p>
+          <h4>My Submission: </h4>
+          <Pdfviewer pdf={mySubmission} name={"submission.pdf"} />
+        </div>
+      ) : today > deadline ? (
+        <div>deadline missed</div>
       ) : (
         <Form>
           <InputContainer>

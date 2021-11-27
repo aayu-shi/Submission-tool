@@ -89,9 +89,8 @@ const SubmissionsList = (props) => {
           }
         });
         setPoints([...updatedPointsArray]);
-        // pointsUpdate = [...updatedPointsArray];
         console.log(points);
-        alert("submitted sucessfully");
+        alert("graded sucessfully");
       })
       .catch((err) => console.log(err));
   };

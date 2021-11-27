@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Assignments from "./assignments";
+import AssignmentDetails from "./assignmentDetails";
+import CreateAssignment from "../../components/createAssignment";
+import { useParams } from "react-router-dom";
+import Members from "./members";
 
 const Tab = styled.button`
   font-size: 16px;
@@ -21,8 +26,15 @@ const Tab = styled.button`
 const ButtonGroup = styled.div`
   display: flex;
 `;
+const MembersContainer = styled.div`
+  width: 100%;
+  margin-top: 5%;
+`;
 const types = ["Assignments", "People"];
-export default function TabGroup() {
+export default function TabGroup(props) {
+  const [assignmentDetails, setassignmentDetails] = useState({});
+  console.log(assignmentDetails);
+  let userRole = props.user.role || sessionStorage.getItem("role") || "";
   const [active, setActive] = useState(types[0]);
   return (
     <>
@@ -37,8 +49,26 @@ export default function TabGroup() {
           </Tab>
         ))}
       </ButtonGroup>
-      <p />
-      {/* <p> {active} </p> */}
+      {active === "Assignments" ? (
+        assignmentDetails.index ? (
+          <AssignmentDetails
+            assignmentDetails={assignmentDetails}
+            setassignmentDetails={setassignmentDetails}
+          />
+        ) : (
+          <div>
+            {userRole === "staff" ? <CreateAssignment /> : <div />}
+            <Assignments
+              setassignmentDetails={setassignmentDetails}
+              classDetails={props.classData}
+            />
+          </div>
+        )
+      ) : (
+        <MembersContainer>
+          <Members members={props.classData.members} />
+        </MembersContainer>
+      )}
     </>
   );
 }

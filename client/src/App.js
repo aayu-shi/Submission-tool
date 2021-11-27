@@ -5,10 +5,13 @@ import Login from "./screens/AuthPage/signin";
 import Signup from "./screens/AuthPage/signup";
 import Home from "./screens/HomePage";
 import useToken from "./customHooks/useToken";
-import Classroom from "./screens/Classroom";
+// import Classroom from "./screens/Classroom";
+import Navigation from "./components/navbar";
+import { useLocation } from "react-router-dom";
 
 const App = () => {
   const { token, setToken } = useToken();
+  const location = useLocation();
   console.log(token);
   const [user, setUserLogin] = useState(token ? parseJwt(token) : {});
   function parseJwt(token) {
@@ -29,6 +32,14 @@ const App = () => {
 
   return (
     <Body>
+      {location.pathname !== "/login" &&
+      location.pathname !== "/signup" &&
+      user &&
+      user._id ? (
+        <Navigation setUserLogin={setUserLogin} />
+      ) : (
+        <div />
+      )}
       <Switch>
         <Route
           path="/"
@@ -50,11 +61,17 @@ const App = () => {
           path="/login"
           element={<Login setUserLogin={setUserLogin} />}
         />
-        <Route
+        {/* <Route
           exact
           path="/classroom/:id/:name"
-          element={<Classroom user={user} setUserLogin={setUserLogin} />}
-        />
+          element={
+            <Classroom
+              user={user}
+              setUserLogin={setUserLogin}
+              classDetails={""}
+            />
+          }
+        /> */}
       </Switch>
     </Body>
   );

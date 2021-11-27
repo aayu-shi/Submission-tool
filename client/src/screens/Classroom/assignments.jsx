@@ -27,7 +27,7 @@ const Text = styled.h4`
 `;
 
 const Assignments = (props) => {
-  const { id } = useParams();
+  const id = props.classDetails._id;
   const allAssignments = GetData();
   let assignments = allAssignments.filter((data) => {
     return id.includes(data.classId);
