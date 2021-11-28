@@ -7,7 +7,6 @@ import axios from "axios";
 import SubmitAssignment from "../../components/submitAssignment";
 import SubmissionsList from "../../components/submissionsList";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
 
 const Container = styled.div`
   display: flex;
@@ -53,11 +52,13 @@ const TitleBar = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const Title = styled.h2``;
 
+// return details of a particular assignment
 const AssignmentDetails = (props) => {
   let userRole = sessionStorage.getItem("role") || "";
   const selectedFile = props.assignmentDetails.index.selectedFile;
+
+  //api call to delete assignment
   function DeleteAssignment(id) {
     const config = {
       params: {
@@ -67,12 +68,12 @@ const AssignmentDetails = (props) => {
     axios
       .get("http://localhost:8000/assignment/deleteAssignment", config)
       .then((res) => {
-        console.log(res);
         alert("deleted sucessfully");
         window.location.reload();
       })
       .catch((error) => console.log(error));
   }
+
   return (
     <Container>
       <BackButton

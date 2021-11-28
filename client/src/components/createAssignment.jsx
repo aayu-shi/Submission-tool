@@ -14,6 +14,7 @@ import {
 import FileBase from "react-file-base64";
 import { ErrorMsg } from "../screens/AuthPage/formStyles";
 
+//styles for react modal
 const customStyles = {
   content: {
     top: "50%",
@@ -28,7 +29,8 @@ const customStyles = {
 };
 Modal.setAppElement(document.getElementById("root"));
 
-const CreateAssignment = (props) => {
+// modal to create a new assignment
+const CreateAssignment = () => {
   const { id } = useParams();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [newAssignment, setAssignment] = useState({
@@ -44,6 +46,7 @@ const CreateAssignment = (props) => {
     setAssignment({ ...newAssignment, [e.target.name]: e.target.value });
   };
 
+  //api call to create assignment
   const create = () => {
     axios
       .post("http://localhost:8000/assignment/createAssignment", newAssignment)
@@ -128,7 +131,6 @@ const CreateAssignment = (props) => {
               type="date"
               name="deadline"
               placeholder="date"
-              // value={newAssignment.deadline}
               onChange={(e) => handleChange(e)}
             />
           </InputContainer>

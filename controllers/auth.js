@@ -6,6 +6,7 @@ const { createJWT } = require("../helper/auth");
 const emailRegexp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
+//signup
 exports.signup = (req, res) => {
   let { name, email, password, password_confirmation } = req.body;
   let errors = [];
@@ -72,6 +73,7 @@ exports.signup = (req, res) => {
     });
 };
 
+//signin
 exports.signin = (req, res) => {
   let { email, password } = req.body;
   let errors = [];

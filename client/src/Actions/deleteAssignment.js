@@ -13,4 +13,4 @@ const DeleteAssignment = (id) => {
   }, []);
   return data;
 };
-export default GetData;
+export default DeleteAssignment;

@@ -6,25 +6,21 @@ import Pdfviewer from "./pdfviewer";
 import SubmissionsList from "./submissionsList";
 
 const SubmitAssignment = (props) => {
-  const [isAlreadySubmitted, setIsAlreadySubmitted] = useState(false);
+  const [isAlreadySubmitted, setIsAlreadySubmitted] = useState(false); //check if aasignment is already submiited
+
   const [submittedFile, setSubmittedFile] = useState({
     selectedFile: "",
   });
+
   const [mySubmission, setMySubmission] = useState();
   const [isDeadlineMissed, setisDeadlineMissed] = useState(false);
-  const deadline = new Date(props.deadline);
-  console.log(deadline);
 
+  //check if deadline is missed
+  const deadline = new Date(props.deadline);
   function realtimeClock() {
     const now = new Date();
     deadline.setHours(0, 0, 0, 0);
     now.setHours(0, 0, 0, 0);
-    console.log(
-      now.getDate(),
-      now.getTime(),
-      deadline.getDate(),
-      deadline.getTime()
-    );
     if (now.getTime() > deadline.getTime()) {
       setisDeadlineMissed(true);
     } else {
@@ -32,6 +28,8 @@ const SubmitAssignment = (props) => {
     }
   }
   requestAnimationFrame(realtimeClock);
+
+  //api call to add submission
   const addSubmission = (e, id, userid, submittedFile, username) => {
     e.preventDefault();
     axios
@@ -42,7 +40,6 @@ const SubmitAssignment = (props) => {
         student: username,
       })
       .then((res) => {
-        console.log(res);
         alert("submitted sucessfully");
         if (submittedFile.selectedFile !== "") {
           setIsAlreadySubmitted(true);
@@ -66,15 +63,15 @@ const SubmitAssignment = (props) => {
     axios
       .get(`http://localhost:8000/assignment/getSubmission`, config)
       .then((res) => {
-        console.log(res, "assignment details");
         if (res.data !== "") {
           setIsAlreadySubmitted(true);
           setMySubmission(res.data);
-          console.log(mySubmission);
         }
       })
       .catch((err) => console.log(err));
   }, []);
+
+  //get user details from user token
   const getuserdetail = () => {
     let token = sessionStorage.getItem("token");
     const base64Url = token.split(".")[1];

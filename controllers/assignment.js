@@ -1,5 +1,6 @@
 const Assignment = require("../models/Assignment");
 
+//for fetching available assignment
 exports.getAssignments = async (req, res) => {
   try {
     const Assignments = await Assignment.find();
@@ -8,6 +9,8 @@ exports.getAssignments = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+// for creating a new assignment
 exports.createAssignment = (req, res) => {
   let { title, description, classId, deadline, selectedFile } = req.body;
   const newAssignment = new Assignment({
@@ -30,6 +33,7 @@ exports.createAssignment = (req, res) => {
     });
 };
 
+// for adding submission for assignment
 exports.updateAssignment = async (req, res) => {
   const id = req.body.id;
   const submission = {
@@ -49,10 +53,10 @@ exports.updateAssignment = async (req, res) => {
     await query.clone();
   } catch (error) {
     res.status(409).json({ errors: error });
-    console.log(error);
   }
 };
 
+// for grading a assignment
 exports.gradeAssignment = async (req, res) => {
   const id = req.body.id;
   const submission = {
@@ -80,10 +84,10 @@ exports.gradeAssignment = async (req, res) => {
     await query.clone();
   } catch (error) {
     res.status(409).json({ errors: error });
-    console.log(error);
   }
 };
 
+//to get submitted assignment
 exports.getSubmission = async (req, res) => {
   const id = req.query.id;
   const studentId = req.query.studentId;
@@ -91,7 +95,6 @@ exports.getSubmission = async (req, res) => {
   const query = Assignment.findById(id, (err, getAssignment) => {
     getAssignment.submissions.forEach((element) => {
       if (element.studentId === studentId) {
-        console.log(element);
         result = {
           submittedFile: element.submittedFile,
           points: element.points,
@@ -107,9 +110,9 @@ exports.getSubmission = async (req, res) => {
   }
 };
 
+//to delete a assignment
 exports.deleteAssignment = async (req, res) => {
   const id = req.query.id;
-  console.log(id);
   const query = Assignment.findByIdAndDelete(id, (err, element) => {
     if (err) {
       res.status(404).json({ message: error });

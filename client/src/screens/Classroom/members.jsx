@@ -17,6 +17,7 @@ const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
 
+//returns memers(people) of the classroom
 export default function Members() {
   const { id } = useParams();
   const members = GetMembers(id);

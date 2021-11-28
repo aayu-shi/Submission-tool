@@ -37,22 +37,16 @@ const customStyles = {
 };
 Modal.setAppElement(document.getElementById("root"));
 const SubmissionsList = (props) => {
-  // let pointsUpdate = [];
-  const [points, setPoints] = useState([]);
+  const [points, setPoints] = useState([]); // to set and update grade
   useEffect(() => {
     let pointsArray = [];
     props.data.submissions.forEach((element) => {
       pointsArray.push(element.points);
     });
     setPoints(pointsArray);
-    // pointsUpdate = [...pointsArray];
   }, []);
-  // useEffect(() => {
-  //   if (pointsUpdate.length > 0) {
-  //     setPoints(pointsUpdate);
-  //   }
-  // }, [pointsUpdate]);
 
+  //api call to grade a assignment
   const gradeAssignment = (
     e,
     id,
@@ -62,14 +56,6 @@ const SubmissionsList = (props) => {
     submittedPoints
   ) => {
     e.preventDefault();
-    console.log(
-      "grading",
-      id,
-      userid,
-      submittedFile,
-      username,
-      submittedPoints
-    );
     axios
       .put(`http://localhost:8000/assignment/gradeAssignment`, {
         id: id,
@@ -79,7 +65,6 @@ const SubmissionsList = (props) => {
         points: submittedPoints,
       })
       .then((res) => {
-        console.log(res);
         let updatedPointsArray = [];
         props.data.submissions.forEach((element) => {
           if (element.studentId == userid) {
@@ -89,17 +74,10 @@ const SubmissionsList = (props) => {
           }
         });
         setPoints([...updatedPointsArray]);
-        console.log(points);
         alert("graded sucessfully");
       })
       .catch((err) => console.log(err));
   };
-  console.log(points, "checkpoints:");
-  let token = sessionStorage.getItem("token");
-  const base64Url = token.split(".")[1];
-  const rep = base64Url.replace("-", "+").replace("_", "/");
-  let currentUser = JSON.parse(window.atob(rep));
-  console.log("user", currentUser);
 
   const [grade, setGrade] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);

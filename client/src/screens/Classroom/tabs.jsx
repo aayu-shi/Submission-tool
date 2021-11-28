@@ -33,7 +33,6 @@ const MembersContainer = styled.div`
 const types = ["Assignments", "People"];
 export default function TabGroup(props) {
   const [assignmentDetails, setassignmentDetails] = useState({});
-  console.log(assignmentDetails);
   let userRole = props.user.role || sessionStorage.getItem("role") || "";
   const [active, setActive] = useState(types[0]);
   return (

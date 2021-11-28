@@ -35,10 +35,12 @@ const Text = styled.h4`
   vertical-align: center;
   margin-top: 7px;
 `;
-
+//shows the list of assignments
 const Assignments = (props) => {
   const { id } = useParams();
-  const allAssignments = GetData();
+  const allAssignments = GetData(); // get all available assignments
+
+  //filter assignmens that belong to the particular classsroom
   let assignments = allAssignments.filter((data) => {
     return id.includes(data.classId);
   });

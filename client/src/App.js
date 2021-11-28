@@ -12,7 +12,8 @@ import { useLocation } from "react-router-dom";
 const App = () => {
   const { token, setToken } = useToken();
   const location = useLocation();
-  console.log(token);
+
+  //user token
   const [user, setUserLogin] = useState(token ? parseJwt(token) : {});
   function parseJwt(token) {
     if (!token) {

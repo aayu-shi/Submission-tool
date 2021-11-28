@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import React from "react";
 
+//styles for auth form
+
 export const MainContainer = styled.div`
   margin-left: auto;
   margin-right: auto;

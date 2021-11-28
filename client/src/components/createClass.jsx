@@ -26,6 +26,7 @@ const customStyles = {
 };
 Modal.setAppElement(document.getElementById("root"));
 
+// modal to create a new Class
 const CreateClass = (props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [newClass, setClass] = useState({
@@ -38,6 +39,7 @@ const CreateClass = (props) => {
     setClass({ ...newClass, [e.target.name]: e.target.value });
   };
 
+  //api call to create a new classroom
   const create = () => {
     axios
       .post("http://localhost:8000/classroom/createClass", newClass)

@@ -1,5 +1,6 @@
 const Classroom = require("../models/class");
 
+// to get available classes
 exports.getclasses = async (req, res) => {
   try {
     const Classes = await Classroom.find();
@@ -28,6 +29,7 @@ exports.createClass = (req, res) => {
     });
 };
 
+// to add member to classroom : called when a student enrolls in a classroom
 exports.updateClass = async (req, res) => {
   const newMember = req.body.student;
   const id = req.body.id;
@@ -39,10 +41,11 @@ exports.updateClass = async (req, res) => {
       res.status(200).json(updatedClass);
     });
   } catch (error) {
-    console.log(error);
+    res.status(409).json({ errors: err });
   }
 };
 
+// to get members of the classroom
 exports.getMembers = async (req, res) => {
   const id = req.query.id;
   try {
@@ -50,6 +53,6 @@ exports.getMembers = async (req, res) => {
       res.status(200).json(updatedClass.members);
     });
   } catch (error) {
-    console.log(error);
+    res.status(409).json({ errors: err });
   }
 };

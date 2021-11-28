@@ -10,7 +10,7 @@ const Container = styled.div`
   text-align: center;
   text-transform: uppercase;
 `;
-
+// screen that appers when user enters a particular classroom
 const Classroom = (props) => {
   const { id, name } = useParams();
   return (

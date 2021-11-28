@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+//custom hooks to store data in session storage
+
 export default function useToken() {
   const getToken = () => {
     const tokenString = sessionStorage.getItem("token");

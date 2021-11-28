@@ -22,6 +22,7 @@ const FileName = styled.div`
   padding: 2%;
   text-transform: lowercase;
 `;
+//pdf viewer
 export const Pdfviewer = (props) => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   return (
@@ -52,6 +53,8 @@ const customStyles = {
   },
 };
 Modal.setAppElement(document.getElementById("root"));
+
+//modal for viewing pdf
 const PdfModal = (props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {

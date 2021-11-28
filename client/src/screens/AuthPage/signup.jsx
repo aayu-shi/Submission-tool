@@ -19,19 +19,19 @@ function Signup() {
     email: "",
     password: "",
     password_confirmation: "",
-    // uniqueId: "",
   });
   const [err, setError] = useState("");
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
+  //api call for signup
   const register = () => {
     axios
       .post("http://localhost:8000/api/signup", user)
       .then((res) => {
         alert("Signup sucessful login to continue!!");
         navigate("/login");
-        console.log(res);
       })
       .catch((error) => {
         setError("*" + error.response.data.errors[0].error);

@@ -24,15 +24,14 @@ function Login(props) {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const [err, setError] = useState("");
+
+  //api call for login
   const login = () => {
     axios
       .post("http://localhost:8000/api/signin", user)
       .then((res) => {
-        console.log(res);
         setToken(res.data?.token);
-        console.log(res.data.message.role);
         sessionStorage.setItem("role", res.data?.message?.role);
-        console.log("user token saved");
         props.setUserLogin(res.data.message);
         navigate("/");
       })

@@ -3,16 +3,19 @@ import GetData from "../../Actions/getClasses";
 import ClassCard from "../../components/classCard";
 import { Marginer, Grid } from "../../components/commonStyles";
 import styled from "styled-components";
-import Classroom from "../Classroom";
+
 const Title = styled.h4`
   margin-left: 20px;
   font-size: 26px;
   font-weight: 500;
 `;
+// returns classes for a student
 const ClassesStudent = (props) => {
   const [openClass, setopenClass] = useState(false);
   const [classData, setClassData] = useState();
   const allClasses = GetData();
+
+  //classes in which student is enrolled
   let classes = allClasses.filter((class_data) => {
     const email = props.user.email;
     return email.includes(
@@ -20,13 +23,13 @@ const ClassesStudent = (props) => {
     );
   });
 
+  //classes in which student is not enrolled
   let availableClasses = allClasses.filter((class_data) => {
     const email = props.user.email;
     return !email.includes(
       class_data.members.find((student) => student === email)
     );
   });
-  // if (openClass === false) {
   return (
     <div>
       <Marginer direction="vertical" margin={80} />
@@ -55,9 +58,6 @@ const ClassesStudent = (props) => {
       })}
     </div>
   );
-  // } else {
-  //   return <Classroom user={props.user} classData={classData} />;
-  // }
 };
 
 export default ClassesStudent;
