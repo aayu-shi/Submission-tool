@@ -48,6 +48,10 @@ const CreateAssignment = () => {
 
   //api call to create assignment
   const create = () => {
+    const date = new Date();
+    if (!newAssignment.deadline) {
+      setAssignment({ ...newAssignment, [newAssignment.deadline]: date });
+    }
     axios
       .post("http://localhost:8000/assignment/createAssignment", newAssignment)
       .then((res) => {

@@ -52,10 +52,12 @@ const TitleBar = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const Title = styled.h2``;
 
 // return details of a particular assignment
 const AssignmentDetails = (props) => {
-  let userRole = sessionStorage.getItem("role") || "";
+  let userRole = sessionStorage.getItem("role") || ""; //get user role from session storge
+
   const selectedFile = props.assignmentDetails.index.selectedFile;
 
   //api call to delete assignment
@@ -73,7 +75,6 @@ const AssignmentDetails = (props) => {
       })
       .catch((error) => console.log(error));
   }
-
   return (
     <Container>
       <BackButton
