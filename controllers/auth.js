@@ -23,7 +23,7 @@ exports.signup = (req, res) => {
   }
   if (!password_confirmation) {
     errors.push({
-      error: "conirm password is required",
+      error: "confirm password is required",
     });
   }
   if (password != password_confirmation) {

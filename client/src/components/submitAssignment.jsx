@@ -17,6 +17,14 @@ const SubmitAssignment = (props) => {
 
   function realtimeClock() {
     const now = new Date();
+    deadline.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
+    console.log(
+      now.getDate(),
+      now.getTime(),
+      deadline.getDate(),
+      deadline.getTime()
+    );
     if (now.getTime() > deadline.getTime()) {
       setisDeadlineMissed(true);
     } else {

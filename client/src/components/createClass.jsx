@@ -46,6 +46,7 @@ const CreateClass = (props) => {
         setError("");
         setClass({ ...newClass, name: "", description: "" });
         setIsOpen(false);
+        window.location.reload();
       })
       .catch((error) => {
         setError("please fill all details correctly");

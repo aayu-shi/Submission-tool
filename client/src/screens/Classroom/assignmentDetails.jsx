@@ -94,18 +94,21 @@ const AssignmentDetails = (props) => {
                 GetTime(props.assignmentDetails.index.deadline)}
             </Description>
           </div>
-
-          <Button
-            variant="contained"
-            disableElevation
-            color="error"
-            onClick={() => {
-              DeleteAssignment(props.assignmentDetails.index._id);
-            }}
-            sx={{ maxHeight: 40 }}
-          >
-            Delete
-          </Button>
+          {userRole === "staff" ? (
+            <Button
+              variant="contained"
+              disableElevation
+              color="error"
+              onClick={() => {
+                DeleteAssignment(props.assignmentDetails.index._id);
+              }}
+              sx={{ maxHeight: 40 }}
+            >
+              Delete
+            </Button>
+          ) : (
+            <div />
+          )}
         </TitleBar>
         <Description>{props.assignmentDetails.index.description}</Description>
         <SubContainer>
