@@ -2,6 +2,7 @@
 
 Using this tool, the faculty can create classrooms, distribute assignments, and can grade them upon receiving submissions
 from the students, whereas a student can enroll in various classrooms , submit assignments and can view thier grades in respective assignments.
+[Quick Guide](https://drive.google.com/file/d/119PXNosiwjkX_vtmytAxZ2VybT7NOfAv/view?usp=sharing)
 
 ## Installation
 
