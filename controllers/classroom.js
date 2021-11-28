@@ -41,7 +41,7 @@ exports.updateClass = async (req, res) => {
       res.status(200).json(updatedClass);
     });
   } catch (error) {
-    res.status(409).json({ errors: err });
+    res.status(409).json({ errors: error });
   }
 };
 
@@ -53,6 +53,6 @@ exports.getMembers = async (req, res) => {
       res.status(200).json(updatedClass.members);
     });
   } catch (error) {
-    res.status(409).json({ errors: err });
+    console.log(error);
   }
 };
